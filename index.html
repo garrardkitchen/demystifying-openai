@@ -1,0 +1,294 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>reveal.js</title>
+
+		<link rel="stylesheet" href="dist/reset.css">
+		<link rel="stylesheet" href="dist/reveal.css">
+		<link rel="stylesheet" href="dist/theme/black.css">
+
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="plugin/highlight/monokai.css">
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section>
+					<h2 class="r-fit-text">demystifying (open)AI</h2>
+					<h3>The basics</h3>
+					
+				</section>
+			
+				<section>
+					<h3>Agenda</h3>
+					<div class="mermaid">
+					  <pre>
+						%%{init: {'theme': 'dark', 'themeVariables': { 'darkMode': true }}}%%
+						
+						kanban
+							todo[Todo]
+							  id4[HLD: Overview]@{ ticket: DM-0002, assigned: 'gpk', priority: 'High' }
+							 
+							term[In-progress]
+								id3[Terminology]@{ ticket: DM-0001, assigned: 'gpk', priority: 'High' }
+							 
+							demo[Done]
+								id3_1[RAG: Console app]@{ ticket: DM-0013, assigned: 'gpk', priority: 'High' }					
+								id3_2[MCP: VSCode Hosting]@{ ticket: DM-0014, assigned: 'gpk', priority: 'High' }
+								id3_3[Chat: Web app]@{ ticket: DM-0014, assigned: 'gpk', priority: 'High' }
+					  </pre>
+					</div>
+				</section>
+				<section>
+					<h3>HLD</h3>
+					<div class="mermaid">
+					  <pre>
+						%%{init: {'theme': 'dark', 'themeVariables': { 'darkMode': true }}}%%
+						
+						
+						flowchart LR
+							classDef blue fill:#336699,color:#fff
+							classDef orange fill:#FFA500,color:#000
+							classDef green fill:#4CAF50,color:#333
+							classDef gray fill:#808080,color:#333
+							classDef yellow fill:#FFFF00,color:#333
+							classDef red fill:#FF0000,color:#fff
+							classDef purple fill:#800080,color:#fff
+
+							user_input@{ shape: sl-rect, label: "User request" }
+							llm@{ shape: processes, label: "LLM" }
+							vector@{ shape: cyl, label: "Vector Store" }
+							docs@{ shape: lin-doc, label: "PDFs" }
+							data@{ shape: cyl, label: "Corp Db" }
+							embeddings@{ shape: sl-rect, label: "Embedding" }
+							semantic_search@{ shape: odd, label: "Semantic Search" }
+
+							chunking@{ shape: docs, label: "Chunking" }
+							indexing@{ shape: notch-rect, label: "Indexing" }
+							
+							retrieval@{ shape: hex, label: "Retrieval" }
+							augmentation@{ shape: doc, label: "Augmentation" }
+							generation@{ shape: stadium, label: "Generation" }
+
+							tools@{ shape: hex, label: "Tools" }
+							documents@{ shape: docs, label: "Documents" }
+							db@{ shape: cyl, label: "Databases" }
+							api@{ shape: processes, label: "APIs" }
+
+
+							user_input:::blue --> llm
+							user_input --> semantic_search
+							semantic_search:::red --> retrieval
+							embeddings:::green <---> retrieval:::orange
+							retrieval --> augmentation:::yellow
+							augmentation --> generation:::yellow
+							generation --> llm:::green
+							vector:::orange --> retrieval
+
+							subgraph RAG
+								retrieval
+								augmentation
+								generation
+
+							end
+
+							subgraph ingestion
+								docs --> chunking:::orange
+								data --> chunking
+								chunking --> indexing:::orange
+								indexing --> embeddings
+								embeddings --> vector:::orange
+							end
+
+							user_input --> tools
+							tools:::orange <---> llm
+							
+							subgraph MCP
+
+								tools <---> api:::purple
+								tools <---> db:::purple
+								tools <----> documents:::purple
+
+							end
+					  </pre>
+					</div>
+				</section>
+				<section data-markdown>
+					
+					<textarea data-template>
+
+						---
+
+						Definition of **Ingestion**
+
+						> The process of collecting and preparing data (such as documents or database records) for use in an AI system, often involving cleaning and formatting.
+
+						---
+
+						Definition of **Chunking**
+
+						> The process of splitting large documents or datasets into smaller, manageable pieces (chunks) to facilitate processing, embedding, and retrieval.
+
+						---
+
+						Definition of **Indexing**
+
+						> Creating a searchable structure (index) from data chunks, enabling efficient lookup and retrieval during semantic search.
+
+						---
+
+						Definition of **Embeddings**
+
+						> Numerical vector representations of text or data, capturing semantic meaning and enabling similarity comparisons in vector space.
+
+						---
+
+						Definition of **Vector store**
+
+						> A specialized database for storing and searching embeddings (vectors), supporting fast similarity search and retrieval.
+
+						---
+
+						Definition of **Caching (CAG)**
+
+						> The practice of storing frequently accessed or computed results (such as embeddings or search results) to speed up future operations, reduce redundant computation and token usage.
+
+						---
+
+						Definition of **Semantic search**
+
+						> A search technique that uses embeddings to find information based on meaning and context, rather than exact keyword matches.
+
+						---
+
+						Definition of **Retrieval**
+
+						> The process of finding and returning relevant data chunks or documents from a vector store or index, typically using semantic search.
+
+						---
+
+						Definition of **Augmentation**
+
+						> Enhancing or enriching a user query or prompt with retrieved context or external information before passing it to a language model.
+
+						---
+
+						Definition of **Generation**
+
+						> The process where a language model (LLM) produces new text or responses based on the augmented prompt and context.
+
+						---
+
+						Definition of **Rating**
+
+						> Evaluating or scoring the quality, relevance, or accuracy of generated responses or retrieved results, often for feedback or improvement.
+
+						---
+
+						Definition of **LLM**
+
+						> Large Language Model; an advanced AI model trained on vast amounts of text data designed to understand, generate, and process human language.
+
+						---
+
+						Definition of **MCP**
+
+						> Model Context Protocol; an open protocol that standardizes how applications provide context to LLMs, and provides a standardized way to connect AI models to different data sources and tools.
+
+						---
+
+					</textarea>
+					
+				</section>
+
+
+				<section data-markdown>
+					
+					<textarea data-template>
+						<pre><code data-trim class="language-csharp" data-line-numbers="3-5|6|9-12|14-20|23|25|27|29" data-ln-start-from="7">
+						public static async Task TextEmbedding()
+						{
+							var openAiClient = CreateOpenAiClient();
+							var chatClient = openAiClient.AsChatClient("gpt-4o-mini");
+							var generator = openAiClient.GetEmbeddingClient("text-embedding-3-small").AsEmbeddingGenerator();
+							var collection = await GetCollectionCreateIfNotExistsAsync();
+							
+							// user query
+							var query = "I want a pleasant short story about a drupert. " +
+										"This story is to be less than 5 sentences. " +
+										"It has to make me want to laugh out loud. It must end with a hugging emoji " +
+										"and this emogi has to be on a new line. The story must have a title";
+					
+							string[] externalData = [
+								"A Drupert is a fictional creature", 
+								"A Sleepert is meant to make you fall asleep during school time", 
+								"Chicken Jockie!",
+								"A Drupert is meant to distract", 
+								"A Drupert sole purpose is to make you laugh", 
+								"If someone draws a Drupert during class time and you laugh, you'll likely be told off my your teacher"];
+							
+							// step 1: ingestion (chunking & indexing). Tokens will be used
+							await IngestionAsync(collection, generator, externalData);
+							// step 2: retrieval. Tokens will be used
+							var searchResults = await SemanticSearchAsync(collection, generator, query);
+							// step 3: augmentation
+							var prompt = CreatePrompt(searchResults.Results, query);
+							// step 4: generation. Tokens will be used
+							Console.WriteLine(await chatClient.GetResponseAsync(new ChatMessage(ChatRole.User, prompt)));
+						}
+						</code></pre>
+					</textarea>
+				</section>
+
+				
+				<section data-markdown>
+					
+					<textarea data-template>
+						## Demo time
+					
+					</textarea>
+				</section>
+
+				<section>
+				<section data-transition="zoom">
+					<h2>This slide will override the presentation transition and zoom!</h2>
+				  </section>
+				  
+				  <section data-transition-speed="fast">
+					<h2>Choose from three transition speeds: default, fast or slow!</h2>
+				  </section>
+				</section>
+
+			
+			</div>
+		</div>
+
+		<script src="dist/reveal.js"></script>
+		<script src="plugin/notes/notes.js"></script>
+		<script src="plugin/markdown/markdown.js"></script>
+		<script src="plugin/highlight/highlight.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/reveal.js-mermaid-plugin@11.4.1/plugin/mermaid/mermaid.js"></script>
+		<script>
+			// More info about initialization & config:
+			// - https://revealjs.com/initialization/
+			// - https://revealjs.com/config/
+			Reveal.initialize({
+				hash: true,
+				width: 900,
+				height: 500,
+				  // mermaid initialize config
+				  mermaid: {
+					// flowchart: {
+					//   curve: 'linear',
+					// },
+					},
+
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes, RevealMermaid ]
+			});
+		</script>
+	</body>
+</html>

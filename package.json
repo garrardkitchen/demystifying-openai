@@ -1,0 +1,14 @@
+{
+  "dependencies": {
+    "reveal.js": "^5.2.1",
+    "reveal.js-mermaid-plugin": "^11.4.1"
+  },
+  "main": "reveal.js",
+  "module": "reveal.esm.js",
+  "scripts": {
+    "start": "http-server -p 8001"
+  },
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  }
+}
