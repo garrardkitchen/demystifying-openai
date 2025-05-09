@@ -22,13 +22,17 @@
 	<body>
 		<div class="reveal">
 			<div class="slides">
-				<section>
-					<h2 class="r-fit-text">demystifying (open)AI</h2>
-					<h3>The basics</h3>
-					
+				<section data-markdown>
+
+					<textarea data-template>
+						## demystifying (open)AI
+				
+						<span class="blue-text">_The Basics_</span>
+					</textarea>
+
 				</section>
 			
-				<section>
+				<!-- <section>
 					<h3>Agenda</h3>
 					<div class="mermaid">
 					  <pre>
@@ -47,9 +51,9 @@
 								id3_3[Chat: Web app]@{ ticket: DM-0014, assigned: 'gpk', priority: 'High' }
 					  </pre>
 					</div>
-				</section>
+				</section> -->
 				<section>
-					<h3>HLD</h3>
+					<h6>HLD</h6>
 					<div class="mermaid">
 					  <pre>
 						%%{init: {'theme': 'dark', 'themeVariables': { 'darkMode': true }}}%%
@@ -63,6 +67,7 @@
 							classDef yellow fill:#FFFF00,color:#333
 							classDef red fill:#FF0000,color:#fff
 							classDef purple fill:#800080,color:#fff
+							classDef sub fill:#000,color:#fff, stroke:#fff, stroke-width:1px, stroke-dasharray: 5 5, padding: 2px, font-weight: bold
 
 							user_input@{ shape: sl-rect, label: "User request" }
 							llm@{ shape: processes, label: "LLM" }
@@ -94,16 +99,19 @@
 							generation --> llm:::green
 							vector:::orange --> retrieval
 
+							RAG:::sub
+							Ingestion:::sub
+							MCP:::sub
+							
 							subgraph RAG
 								retrieval
 								augmentation
 								generation
-
 							end
 
-							subgraph ingestion
-								docs --> chunking:::orange
-								data --> chunking
+							subgraph Ingestion
+								docs:::purple --> chunking:::orange
+								data:::purple --> chunking
 								chunking --> indexing:::orange
 								indexing --> embeddings
 								embeddings --> vector:::orange
@@ -126,7 +134,7 @@
 					
 					<textarea data-template>
 
-						# Terminology
+						## Terminology
 
 						---
 
