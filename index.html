@@ -12,6 +12,12 @@
 
 		<!-- Theme used for syntax highlighted code -->
 		<link rel="stylesheet" href="plugin/highlight/monokai.css">
+
+		<style>
+			/* any selector under .reveal .slides will be scoped to your slides */
+			.reveal .slides .red-text { color: #e74c3c; }
+			.reveal .slides .blue-text { color: #3498db; }
+		</style>
 	</head>
 	<body>
 		<div class="reveal">
@@ -120,6 +126,8 @@
 					
 					<textarea data-template>
 
+						# Terminology
+
 						---
 
 						Definition of **Ingestion**
@@ -188,6 +196,25 @@
 
 						---
 
+						Definition of **Token**
+
+						> The smallest unit of text (such as a word piece, subword, or character) that a language model processes; tokens are used to measure input length, control context windows, and calculate usage.
+
+						---
+
+						Definition of **Tokenization**
+						
+						> The process of breaking text into tokens according to a model’s vocabulary and rules; tokenization transforms raw text into a sequence of tokens that can be fed into an LLM for processing.
+						
+			
+						---
+
+						**Tokens** and **Tokenization**
+
+						> <span class="red-text">Tokenization</span> is the <span class="red-text">**method**</span>, and <span class="blue-text">tokens</span> are the <span class="blue-text">**output**</span> of that method.
+						
+						---
+
 						Definition of **LLM**
 
 						> Large Language Model; an advanced AI model trained on vast amounts of text data designed to understand, generate, and process human language.
@@ -198,8 +225,7 @@
 
 						> Model Context Protocol; an open protocol that standardizes how applications provide context to LLMs, and provides a standardized way to connect AI models to different data sources and tools.
 
-						---
-
+						
 					</textarea>
 					
 				</section>
@@ -208,6 +234,9 @@
 				<section data-markdown>
 					
 					<textarea data-template>
+
+						A code example: The RAG pattern
+
 						<pre><code data-trim class="language-csharp" data-line-numbers="3-5|6|9-12|14-20|23|25|27|29" data-ln-start-from="7">
 						public static async Task TextEmbedding()
 						{
@@ -230,13 +259,13 @@
 								"A Drupert sole purpose is to make you laugh", 
 								"If someone draws a Drupert during class time and you laugh, you'll likely be told off my your teacher"];
 							
-							// step 1: ingestion (chunking & indexing). Tokens will be used
+							// step 1: ingestion (chunking & indexing). Tokenization
 							await IngestionAsync(collection, generator, externalData);
-							// step 2: retrieval. Tokens will be used
+							// step 2: retrieval. Tokenization
 							var searchResults = await SemanticSearchAsync(collection, generator, query);
 							// step 3: augmentation
 							var prompt = CreatePrompt(searchResults.Results, query);
-							// step 4: generation. Tokens will be used
+							// step 4: generation. Tokenization
 							Console.WriteLine(await chatClient.GetResponseAsync(new ChatMessage(ChatRole.User, prompt)));
 						}
 						</code></pre>
@@ -244,15 +273,13 @@
 				</section>
 
 				
-				<section data-markdown>
-					
-					<textarea data-template>
-						## Demo time
-					
-					</textarea>
+				<section>Demo Time!</section>
+				<section>
+				<section>Demo 1: RAG</section>
+				<section>Demo 2: MCP</section>
 				</section>
 
-				<section>
+				<!-- <section>
 				<section data-transition="zoom">
 					<h2>This slide will override the presentation transition and zoom!</h2>
 				  </section>
@@ -260,7 +287,7 @@
 				  <section data-transition-speed="fast">
 					<h2>Choose from three transition speeds: default, fast or slow!</h2>
 				  </section>
-				</section>
+				</section> -->
 
 			
 			</div>
